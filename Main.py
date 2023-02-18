@@ -1,4 +1,5 @@
 from flask import Flask, render_template, request
+import csv
 
 app = Flask(__name__)
 
@@ -16,7 +17,24 @@ def rootPage():
 def calcGradeDist(class_prefix, class_number, professor_name="NONE"):
     if professor_name == 'NONE':
         #get all data from class/course
-        pass
+        filename = 'phy2053.csv'
+
+        rows = []
+        with open(filename, 'r') as csvfile:
+            datareader = csv.reader(csvfile)
+            for row in datareader:
+                rows.append(row)
+
+        updated_rows = rows[1:-1]
+
+        professor_dict = {}
+        for i in updated_rows:
+            if i[1] in professor_dict:
+                professor_dict[i[1]].append([i[0], i[2], i[3], i[4]])
+            else:
+                professor_dict[i[1]] = [[i[0], i[2], i[3], i[4]]]
+        
+        return professor_dict
     else:
         #get data for certain professor
         
