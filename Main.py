@@ -6,17 +6,21 @@ app = Flask(__name__)
 def rootPage():
     class_prefix = ''
     class_number = ''
-    weight = ''
-    bmi = ''
-    if request.method == "POST" and 'weight' in request.form:
-        class_prefix = float(request.form.get('height'))
-        class_number = float(request.form.get('weight'))
+    if request.method == "POST":
+        class_prefix = request.form.get('ClassPrefix')
+        class_number = request.form.get('ClassNumber')
+        professor_name = request.form.get('ProfessorName')
         grade_dist = calcGradeDist(class_prefix, class_number)
-    return render_template("index.html", height=height, weight=weight, bmi=bmi)
+    return render_template("index.html", )
 
-def calcGradeDist(class_prefix, class_number):
-    professors = 
-    return round((703* weight) / (height)**2,2)
+def calcGradeDist(class_prefix, class_number, professor_name="NONE"):
+    if professor_name == 'NONE':
+        #get all data from class/course
+        pass
+    else:
+        #get data for certain professor
+        
+        return round((703* weight) / (height)**2,2)
 
 #flask by deault accepts get methods, must declare if u want more
 @app.route('/results', methods=['GET','POST'])
