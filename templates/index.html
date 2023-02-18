@@ -34,17 +34,20 @@
 <div>
     {% if grade_dist %}
     {%for professor in grade_dist%}
+    <p><b>{{professor}}</b></p>
+    {%for class in grade_dist[professor]%}
     <p>
     Section Number:<br>
-    {{grade_dist[professor][0]}}<br>
+    {{class[0]}}<br>
     Term:<br>
-    {{grade_dist[professor][1]}}<br>
+    {{class[1]}}<br>
     Percent A's:<br>
-    {{grade_dist[professor][2]}}<br>
+    {{class[2]}}<br>
     Total Students:<br>
-    {{grade_dist[professor][3]}}<br>
+    {{class[3]}}<br>
     <br>
     </p>
+    {% endfor %}
     {% endfor %}
     {% endif %}
 </div>
