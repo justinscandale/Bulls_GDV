@@ -11,14 +11,15 @@
 <div>
     <p>Table</p>
 
-    <form class="pure-form" method="POST" action="/">
-        Input Your Class Prefix:<br>
+    <form class="pure-form" method="POST" action="/home">
+        Class Prefix:<br>
         <input type="text" name="ClassPrefix" required="required"><br>
 
-        Input Your Class Number:<br>
+        Class Number:<br>
         <input type="text" name="ClassNumber" required="required"><br>
 
-        Input Your Professor:<br>
+        Optional<br>
+        Professor Last Name:<br>
         <input type="text" name="ProfessorName"><br>
 
         <button type="submit" class="pure-button pure-button-primary" value="submit">
@@ -31,8 +32,20 @@
 <br>
 
 <div>
-    {% if bmi %}
-    <p>Your bmi is {{bmi}} <br></p>
+    {% if grade_dist %}
+    {%for professor in grade_dist%}
+    <p>
+    Section Number:<br>
+    {{grade_dist[professor][0]}}<br>
+    Term:<br>
+    {{grade_dist[professor][1]}}<br>
+    Percent A's:<br>
+    {{grade_dist[professor][2]}}<br>
+    Total Students:<br>
+    {{grade_dist[professor][3]}}<br>
+    <br>
+    </p>
+    {% endfor %}
     {% endif %}
 </div>
 </body>

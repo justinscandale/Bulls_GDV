@@ -7,12 +7,13 @@ app = Flask(__name__)
 def rootPage():
     class_prefix = ''
     class_number = ''
+    grade_dist = ''
     if request.method == "POST":
         class_prefix = request.form.get('ClassPrefix')
         class_number = request.form.get('ClassNumber')
         professor_name = request.form.get('ProfessorName')
         grade_dist = calcGradeDist(class_prefix, class_number)
-    return render_template("index.html", )
+    return render_template("index.html", grade_dist=grade_dist)
 
 def calcGradeDist(class_prefix, class_number, professor_name="NONE"):
     if professor_name == 'NONE':
