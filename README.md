@@ -1,2 +1,4 @@
 # DevJams_23
  
+LINK to grade dist:
+http://usfweb.usf.edu/dss/infocenter/?report_category=ADM&report_type=SGDIS

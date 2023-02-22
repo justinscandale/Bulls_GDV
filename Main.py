@@ -3,6 +3,7 @@ import csv
 
 app = Flask(__name__)
 
+@app.route('/', methods=["GET","POST"])
 @app.route('/home', methods=["GET","POST"])
 def rootPage():
     class_prefix = ''
