@@ -17,4 +17,4 @@ with open('Links_F22.csv','w') as file:
         writer.writerow([linkUSF + item['href']])
 
 
-def getProf
+###write function to take xcode from each csv file 
