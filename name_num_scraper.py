@@ -2,6 +2,7 @@ import pandas as pd
 from bs4 import BeautifulSoup
 import csv
 import requests 
+import link_scraper
 
 #create dict to store all data in 21 columns
 allInfo={'course_name':[],
@@ -103,6 +104,7 @@ def exportData(csv_name):
     df.to_csv(csv_name,index=False)
 
 #execution occurs here
+link_scraper.createLinkCSV('https://justinscandale.github.io/eng_22f.html','Link_CSVS/F22_ENG_Links.csv')
 scrapeLinks('Link_CSVS/F22_ENG_Links.csv')
 scrapeMainPage('https://justinscandale.github.io/eng_22f.html')
 exportData('F22_ENG.csv')
