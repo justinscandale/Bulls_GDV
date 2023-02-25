@@ -42,7 +42,7 @@ def calcGradeDist(class_prefix, class_number, professor_name="NONE"):
         
         return round((703* weight) / (height)**2,2)
 
-#flask by deault accepts get methods, must declare if u want more
+#flask by default accepts get methods, must declare if u want more
 @app.route('/results', methods=['GET','POST'])
 def method():
     if request.method == 'POST':
