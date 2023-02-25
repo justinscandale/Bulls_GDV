@@ -38,20 +38,24 @@ def scrapeLinks(link_file):
         for rowLink in reader:
             url = rowLink[0] #correct gets url from csv of links
             page = requests.get(url)
-            print('got url')
+            print('rowLink')
+            print('linkLink')
             s = BeautifulSoup(page.content,'html.parser')
             #gets chunk /specific table
             trs = s.find('table',attrs={'class':'gv_report'})
             #gets trs into list
-            tempList = []
-            for row in trs.findAll('tr'):
-                templist2=[]
-                for col in row.findAll('td'):
-                    templist2.append(col.get_text())
-                tempList.append(templist2)
-            allInfo['last_name'].append(tempList[1][0]) #set all info list with prof name
-            allInfo['first_name'].append(tempList[1][1]) #same as above
-            allInfo['course_num'].append(url[url.rindex('=')+1:])
+            try:
+                tempList = []
+                for row in trs.findAll('tr'):
+                    templist2=[]
+                    for col in row.findAll('td'):
+                        templist2.append(col.get_text())
+                    tempList.append(templist2)
+                allInfo['last_name'].append(tempList[1][0]) #set all info list with prof name
+                allInfo['first_name'].append(tempList[1][1]) #same as above
+                allInfo['course_num'].append(url[url.rindex('=')+1:])
+            except:
+                continue
 
 #scrape all grade nums + percents off main HTML page named 'url'
 def scrapeMainPage(url):
@@ -103,8 +107,18 @@ def exportData(csv_name):
     df = pd.DataFrame({ key:pd.Series(value) for key, value in allInfo.items() })
     df.to_csv(csv_name,index=False)
 
-#execution occurs here
-link_scraper.createLinkCSV('https://justinscandale.github.io/eng_22f.html','Link_CSVS/F22_ENG_Links.csv')
-scrapeLinks('Link_CSVS/F22_ENG_Links.csv')
-scrapeMainPage('https://justinscandale.github.io/eng_22f.html')
-exportData('F22_ENG.csv')
+# EXAMPLE CALL
+# #execution occurs here
+# link_scraper.createLinkCSV('https://justinscandale.github.io/eng_22f.html','Link_CSVS/F22_ENG_Links.csv')
+# scrapeLinks('Link_CSVS/F22_ENG_Links.csv')
+# scrapeMainPage('https://justinscandale.github.io/eng_22f.html')
+# exportData('F22_ENG.csv')
+
+
+url = 'https://justinscandale.github.io/F21.html'
+term = 'F21'
+
+link_scraper.createLinkCSV(url,'Link_CSVS/' + term + '_ENG_LINKS.csv')
+scrapeLinks('Link_CSVS/' + term + '_ENG_LINKS.csv')
+scrapeMainPage(url)
+exportData('termData/' + term + "_ENG.csv")
