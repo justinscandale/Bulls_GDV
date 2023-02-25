@@ -1,8 +1,11 @@
+#this module is imported into name_num_scraper.py
+#do not use it through here
+
 from bs4 import BeautifulSoup
 import requests
 import csv
 
-###CHANGE THIS LINK TO CURRENT YEAR/SEMESTER DATA
+
 def createLinkCSV(urlMainPage, nameTOexport):
     html = requests.get(urlMainPage)
     s = BeautifulSoup(html.content, 'html.parser')

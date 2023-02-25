@@ -115,8 +115,8 @@ def exportData(csv_name):
 # exportData('F22_ENG.csv')
 
 
-url = 'https://justinscandale.github.io/F21.html'
-term = 'F21'
+url = 'https://justinscandale.github.io/S21.html'
+term = 'S21'
 
 link_scraper.createLinkCSV(url,'Link_CSVS/' + term + '_ENG_LINKS.csv')
 scrapeLinks('Link_CSVS/' + term + '_ENG_LINKS.csv')
