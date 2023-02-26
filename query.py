@@ -41,9 +41,16 @@ def make_pickle():
     pickle.dump(df, outfile)
     outfile.close()
 
-def query_pickle():
+def query_pickle(pre, num1):
 
     obj = pandas.read_pickle(r'pickled')
-    print(obj)
 
-make_pickle()
+    df = obj.loc[obj['prefix'] == pre]
+    df = obj.loc[obj['num'] == num1]
+    df = df.sort_values(by=['a_per'], ascending=False)
+    print(df)
+    
+    print(df[['course_name', 'last_name', 'first_name', 'a_per', 'Term', 'total_num']].to_string())
+
+
+query_pickle('EGN', '3000')
