@@ -17,6 +17,12 @@ def make_pickle():
         all_df.append(data)
 
     df = pandas.concat(all_df, axis=0)
+    df.set_index('course_num')
+
+    for i in df:
+        print(i)
+
+
 
     filename = 'pickled'
     outfile = open(filename,'wb')
@@ -30,4 +36,4 @@ def query_pickle():
     obj = pandas.read_pickle(r'pickled')
     print(obj)
 
-query_pickle()
+make_pickle()
