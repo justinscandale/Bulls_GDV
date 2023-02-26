@@ -17,19 +17,29 @@ def make_pickle():
         all_df.append(data)
 
     df = pandas.concat(all_df, axis=0)
-    df.set_index('course_num')
+    full_names = []
+    
+    for row in df['course_name']:
+        full_names.append(row)
+        
+    course_num = []
+    course_name = []
+    course_type = []
+    for name in full_names:
+        course_type.append(name[8] if name[8]!=' ' else '-')
+        course_num.append(name[4:8])
+        course_name.append(name[0:3])
 
-    for i in df:
-        print(i)
-
-
+    df['prefix']=course_name
+    df['num'] = course_num
+    df['type'] = course_type
+    print(df)
 
     filename = 'pickled'
     outfile = open(filename,'wb')
 
     pickle.dump(df, outfile)
     outfile.close()
-
 
 def query_pickle():
 
