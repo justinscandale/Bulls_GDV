@@ -1,10 +1,13 @@
 h1{
-    text-align: center;    
+    text-align: center;   
+    background-color: #00573C; 
+    color: whitesmoke;
 }
 
 .main{
-    padding-left: 100px;
-    padding-right: 100px;
-    text-align: left;
-    border: 10px solid blue;
+    padding-left: 50px;
+    padding-right: 50px;
+    text-align: center;
 }
+
+
