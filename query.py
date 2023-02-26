@@ -41,16 +41,26 @@ def make_pickle():
     pickle.dump(df, outfile)
     outfile.close()
 
-def query_pickle(pre, num1):
+#queries data based on input from website: EDGE CASE all data = ''!!!
+def query_pickle(pre = '', num1 = '', prof = ''):
 
-    obj = pandas.read_pickle(r'pickled')
+    df = pandas.read_pickle(r'pickled')
 
-    df = obj.loc[obj['prefix'] == pre]
-    df = obj.loc[obj['num'] == num1]
+    #make list of rows with prefix = pre from obj
+    if(pre != ''):
+        df = df.loc[df['prefix'] == pre]
+        #make list of rows with course_num = cum1 from df
+        if(num1 != ''):
+            df = df.loc[df['num'] == num1]
+    
+    if(prof != ''):
+        df = df.loc[df['last_name']==prof]
+
     df = df.sort_values(by=['a_per'], ascending=False)
+
     print(df)
     
     print(df[['course_name', 'last_name', 'first_name', 'a_per', 'Term', 'total_num']].to_string())
 
 
-query_pickle('EGN', '3000')
+query_pickle('','','')
