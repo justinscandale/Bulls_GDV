@@ -1,3 +1,4 @@
+###Takes data frame and adds columsn of course_type/ course_num/ and course_pre
 import pandas as pd
 import pickle
 
