@@ -44,6 +44,9 @@ def make_pickle():
 #queries data based on input from website: EDGE CASE all data = ''!!!
 def query_pickle(pre = '', num1 = '', prof = ''):
 
+    if pre == '' and prof =='':
+        return None
+
     df = pandas.read_pickle(r'pickled')
 
     #make list of rows with prefix = pre from obj
@@ -57,10 +60,9 @@ def query_pickle(pre = '', num1 = '', prof = ''):
         df = df.loc[df['last_name']==prof]
 
     df = df.sort_values(by=['a_per'], ascending=False)
-
-    print(df)
+    return df.values.tolist()
+    #print(df)
     
-    print(df[['course_name', 'last_name', 'first_name', 'a_per', 'Term', 'total_num']].to_string())
 
 
 query_pickle('','','')

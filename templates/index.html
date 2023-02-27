@@ -13,10 +13,10 @@
 
     <form class="pure-form" method="POST" action="/home">
         Class Prefix:<br>
-        <input type="text" name="ClassPrefix" required="required"><br>
+        <input type="text" name="ClassPrefix" ><br>
 
         Class Number:<br>
-        <input type="text" name="ClassNumber" required="required"><br>
+        <input type="text" name="ClassNumber" ><br>
 
         Optional<br>
         Professor Last Name:<br>
@@ -43,23 +43,10 @@
 <br>
 
 <div>
-    {% if grade_dist %}
-    {%for professor in grade_dist%}
-    <p><b>{{professor}}</b></p>
-    {%for class in grade_dist[professor]%}
-    <p>
-    Section Number:<br>
-    {{class[0]}}<br>
-    Term:<br>
-    {{class[1]}}<br>
-    Percent A's:<br>
-    {{class[2]}}<br>
-    Total Students:<br>
-    {{class[3]}}<br>
-    <br>
-    </p>
-    {% endfor %}
-    {% endfor %}
+    {% if data %}
+    {%for row in data%}
+    <p>{{row}}</p>
+    {%endfor%}
     {% endif %}
 </div>
 </body>

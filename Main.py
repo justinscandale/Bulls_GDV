@@ -1,5 +1,6 @@
 from flask import Flask, render_template, request
 import csv
+import query
 
 app = Flask(__name__)
 
@@ -9,13 +10,14 @@ def rootPage():
     class_prefix = ''
     class_number = ''
     professor_name = ''
+    data = None
     if request.method == "POST":
-        class_prefix = request.form.get('ClassPrefix')
-        class_number = request.form.get('ClassNumber')
-        professor_name = request.form.get('ProfessorName')
-        grade_dist = calcGradeDist(class_prefix, class_number)
-    return render_template("index.html", grade_dist=grade_dist)
-
+        class_prefix = request.form.get('ClassPrefix') if request.form.get('ClassPrefix') != None else ''
+        class_number = request.form.get('ClassNumber') if request.form.get('ClassNumber') != None else ''
+        professor_name = request.form.get('ProfessorName') if request.form.get('ProfessorName') != None else ''
+        data = query.query_pickle(class_prefix,class_number,professor_name)
+    return render_template("index.html", data = data)
+'''
 def calcGradeDist(class_prefix, class_number, professor_name="NONE"):
     if professor_name == 'NONE':
         #get all data from class/course
@@ -41,7 +43,7 @@ def calcGradeDist(class_prefix, class_number, professor_name="NONE"):
         #get data for certain professor
         
         return round((703* weight) / (height)**2,2)
-
+'''
 #flask by default accepts get methods, must declare if u want more
 @app.route('/results', methods=['GET','POST'])
 def method():
