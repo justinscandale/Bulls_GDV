@@ -10,12 +10,14 @@ def rootPage():
     class_prefix = ''
     class_number = ''
     professor_name = ''
+    term = ''
     data = None
     if request.method == "POST":
         class_prefix = request.form.get('ClassPrefix') if request.form.get('ClassPrefix') != None else ''
         class_number = request.form.get('ClassNumber') if request.form.get('ClassNumber') != None else ''
         professor_name = request.form.get('ProfessorName') if request.form.get('ProfessorName') != None else ''
-        data = query.query_pickle(class_prefix,class_number,professor_name)
+        term = request.form.get('Term') if request.form.get('Term') != None else ''
+        data = query.query_pickle(class_prefix,class_number,professor_name,term)
     return render_template("index.html", data = data)
 '''
 def calcGradeDist(class_prefix, class_number, professor_name="NONE"):

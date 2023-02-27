@@ -2,6 +2,7 @@ import pickle
 import csv
 import os
 import pandas
+import getRangeData
 
 def make_pickle():
 
@@ -42,12 +43,13 @@ def make_pickle():
     outfile.close()
 
 #queries data based on input from website: EDGE CASE all data = ''!!!
-def query_pickle(pre = '', num1 = '', prof = ''):
+def query_pickle(pre = '', num1 = '', prof = '', term = ''):
+
 
     if pre == '' and prof =='':
         return None
 
-    df = pandas.read_pickle(r'pickled')
+    df = getRangeData.getRange(term)
 
     #make list of rows with prefix = pre from obj
     if(pre != ''):
