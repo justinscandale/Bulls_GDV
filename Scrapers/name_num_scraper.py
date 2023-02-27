@@ -119,6 +119,6 @@ url = 'https://justinscandale.github.io/S21.html'
 term = 'U21'
 
 link_scraper.createLinkCSV(url,'Link_CSVS/' + term + '_ENG_LINKS.csv')
-scrapeLinks('Link_CSVS/' + term + '_ENG_LINKS.csv')
+scrapeLinks('../Link_CSVS/' + term + '_ENG_LINKS.csv')
 scrapeMainPage(url)
-exportData('termData/' + term + "_ENG.csv")
+exportData('../termData/' + term + "_ENG.csv")

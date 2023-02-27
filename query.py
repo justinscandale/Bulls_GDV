@@ -2,8 +2,8 @@ import pickle
 import csv
 import os
 import pandas
-import getRangeData
 
+#makes pickle based on CSV files
 def make_pickle():
 
     x = os.listdir('termData')
@@ -42,6 +42,17 @@ def make_pickle():
     pickle.dump(df, outfile)
     outfile.close()
 
+#returns the dataFrame to use in query based on the range
+# of term requested by user. if left blank should
+def getRange(lowerLimit = ''):
+    df = pandas.read_pickle(r'pickled') # copies the pickled data
+    if lowerLimit == '':
+        return df
+    termList = ['S21','SU21','F21','S22','SU22','F22']#UPDATE THIS LIST WHEN MORE TERMS ARE ADDED
+    index = termList.index(lowerLimit)
+    newDF = df.loc[df['Term'].isin(termList[index:])]
+    return newDF
+
 #queries data based on input from website: EDGE CASE all data = ''!!!
 def query_pickle(pre = '', num1 = '', prof = '', term = ''):
 
@@ -49,17 +60,17 @@ def query_pickle(pre = '', num1 = '', prof = '', term = ''):
     if pre == '' and prof =='':
         return None
 
-    df = getRangeData.getRange(term)
+    df = getRange(term)
 
     #make list of rows with prefix = pre from obj
     if(pre != ''):
-        df = df.loc[df['prefix'] == pre]
+        df = df.loc[df['prefix'].str.lower() == pre]
         #make list of rows with course_num = cum1 from df
         if(num1 != ''):
             df = df.loc[df['num'] == num1]
     
     if(prof != ''):
-        df = df.loc[df['last_name']==prof]
+        df = df.loc[df['last_name'].str.lower()==prof]
 
     df = df.sort_values(by=['a_per'], ascending=False)
     return df.values.tolist()
