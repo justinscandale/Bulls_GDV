@@ -8,7 +8,7 @@ app = Flask(__name__)
 def rootPage():
     class_prefix = ''
     class_number = ''
-    grade_dist = ''
+    professor_name = ''
     if request.method == "POST":
         class_prefix = request.form.get('ClassPrefix')
         class_number = request.form.get('ClassNumber')
