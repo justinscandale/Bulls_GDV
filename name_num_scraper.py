@@ -119,9 +119,6 @@ url = 'https://justinscandale.github.io/SU21.html'
 term = 'SU21_2'
 
 link_scraper.createLinkCSV(url,'Link_CSVS/' + term + '_ENG_LINKS.csv')
-test_path = '/Users/justinscandale/Desktop/DevJams_23/Link_CSVS/'
-# scrapeLinks('../Link_CSVS/' + term + '_ENG_LINKS.csv')
-scrapeLinks(test_path + term + '_ENG_LINKS.csv')
+scrapeLinks('Link_CSVS/' + term + '_ENG_LINKS.csv')
 scrapeMainPage(url)
-test_path2 = '/Users/justinscandale/Desktop/DevJams_23/termData/'
-exportData(test_path2 + term + "_ENG.csv")
+exportData('termData/' + term + "_ENG.csv")
