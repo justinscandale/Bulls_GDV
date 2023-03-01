@@ -12,13 +12,19 @@ def rootPage():
     professor_name = ''
     term = ''
     data = None
+    graph = None
     if request.method == "POST":
         class_prefix = request.form.get('ClassPrefix').lower() if request.form.get('ClassPrefix') != None else ''
         class_number = request.form.get('ClassNumber') if request.form.get('ClassNumber') != None else ''
         professor_name = request.form.get('ProfessorName').lower() if request.form.get('ProfessorName') != None else ''
         term = request.form.get('Term') if request.form.get('Term') != None else ''
         data = query.query_pickle(class_prefix,class_number,professor_name,term)
-    return render_template("index.html", data = data)
+        if data != None and len(data) != 0:
+            sum = query.sumGrades(data)
+            graph = query.plotGrades(sum,'Graph')
+        else:
+            graph = 'No Data For This Query; Try Again'
+    return render_template("index.html", graph = graph)
 '''
 def calcGradeDist(class_prefix, class_number, professor_name="NONE"):
     if professor_name == 'NONE':

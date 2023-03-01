@@ -49,5 +49,8 @@
     <p>{{row}}</p>
     {%endfor%}
     {% endif %}
+    {% if graph %}
+    {{graph | safe}}
+    {% endif %}
 </div>
 </body>

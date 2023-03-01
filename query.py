@@ -2,6 +2,8 @@ import pickle
 import csv
 import os
 import pandas
+import plotly.graph_objects as go
+from jinja2 import Template, Environment, FileSystemLoader
 
 #makes pickle based on CSV files
 def make_pickle():
@@ -74,8 +76,22 @@ def query_pickle(pre = '', num1 = '', prof = '', term = ''):
 
     df = df.sort_values(by=['a_per'], ascending=False)
     return df.values.tolist()
-    #print(df)
     
+def sumGrades(grades):
+    a, b, c, d, f = 0, 0, 0, 0, 0
+    for row in grades:
+        a += row[4]
+        b +=  row[6]
+        c += row[8]
+        d += row[10]
+        f += row[12]
+    return [a,b,c,d,f]
 
+def plotGrades(grades, gtitle):
+    data = [go.Bar(x=['A','B','C','D','F'],y=grades)]
+    layout = go.Layout(title = gtitle)
+    fig = go.Figure(data=data, layout=layout)
+    plot_html = fig.to_html(full_html=False)
+    return plot_html
 
 query_pickle('','','')
