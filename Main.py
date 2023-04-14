@@ -1,9 +1,20 @@
 from flask import Flask, render_template, request
 import csv
 import query
+import pandas
 
 app = Flask(__name__)
 
+@app.route('/prefix')
+def method1():
+    full_course_prefix = pandas.read_pickle(r'pickled')
+    full_course_prefix = list(full_course_prefix['course_name'])
+    three_letters_prefix = []
+    for prefix in full_course_prefix:
+        if prefix[0:3] not in three_letters_prefix:
+            three_letters_prefix.append(prefix[0:3])
+
+    return render_template('prefix.html',data=three_letters_prefix)
 @app.route('/', methods=["GET","POST"])
 @app.route('/home', methods=["GET","POST"])
 def rootPage():
