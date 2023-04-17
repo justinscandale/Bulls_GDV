@@ -7,8 +7,8 @@
 <body>
     {% if data %}
     {%for pre in data%}
-    <a href="/index">{{pre}}</a>
-    hello
+    <a href="{{ url_for('.search',prefix = pre) }}">{{pre}}</a>
+    <br>
     {%endfor%}
     {% endif %}
 </body>

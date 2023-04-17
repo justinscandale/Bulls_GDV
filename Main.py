@@ -13,8 +13,21 @@ def method1():
     for prefix in full_course_prefix:
         if prefix[0:3] not in three_letters_prefix:
             three_letters_prefix.append(prefix[0:3])
-
     return render_template('prefix.html',data=three_letters_prefix)
+
+@app.route('/num')
+def search():
+    args = request.args
+    args = args.get('prefix')
+    full_course_prefix = pandas.read_pickle(r'pickled')
+    full_course_prefix = list(full_course_prefix['course_name'])
+    four_char_num = []
+    for prefix in full_course_prefix:
+        if prefix[4:8] not in four_char_num:
+            four_char_num.append(prefix[4:8])
+    four_char_num = [args + '-' + i for i in four_char_num]
+    return render_template('num.html',data=four_char_num)
+
 @app.route('/', methods=["GET","POST"])
 @app.route('/home', methods=["GET","POST"])
 def rootPage():
