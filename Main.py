@@ -28,6 +28,13 @@ def search():
     four_char_num = [args + '-' + i for i in four_char_num]
     return render_template('num.html',data=four_char_num)
 
+@app.route('/professors')
+def professors():
+    args = request.args
+    args = args.get('crn')
+    
+    return render_template('professors.html',data=args)
+
 @app.route('/', methods=["GET","POST"])
 @app.route('/home', methods=["GET","POST"])
 def rootPage():
