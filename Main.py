@@ -32,8 +32,10 @@ def search():
 def professors():
     args = request.args
     args = args.get('crn')
-    
-    return render_template('professors.html',data=args)
+    full_course_prefix = pandas.read_pickle(r'pickled')
+    full_course_prefix = full_course_prefix.loc[(full_course_prefix['course_name'].astype(str).str[0:3]==args[0:3]) & (full_course_prefix['course_name'].astype(str).str[4:8]==args[4:])]
+    print(full_course_prefix)
+    return render_template('professors.html',data=full_course_prefix)
 
 @app.route('/', methods=["GET","POST"])
 @app.route('/home', methods=["GET","POST"])
